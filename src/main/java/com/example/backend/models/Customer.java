@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @NamedQueries({
-        @NamedQuery(name = "Customer.getAll",query = "select c from Customer c")
+        @NamedQuery(name = "Customer.findAll",query = "select c from Customer c")
 
 })
 public class Customer {

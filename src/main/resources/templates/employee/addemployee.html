@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<style>
+    .x{
+        position: fixed;
+        padding: 1.5rem;
+        margin-right: 10px;
+        margin-left: 0;
+        border-width: 1px;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+    }
+    #neubar {
+        background: #fae8d2;
+        box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+    }
+
+    .nav-item .active {
+        border-radius: 6px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  4px 4px 8px #ddc1a0,
+        -4px -4px 8px #f7e5cc;
+    }
+    #neubar .dropdown-menu a:hover {
+        color: #454545
+    }
+    #neubar .nav-item {
+        margin : auto 4px;
+    }
+    #neubar a {
+
+        padding-left:12px;
+        padding-right:12px;
+    }
+    #neubar .dropdown-menu {
+        background : #545454
+    }
+    a.navbar-brand {
+        color: #454545
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-sm navbar-light" id="neubar">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item">
+                    <a class="nav-link mx-2 active" aria-current="page" href="/admin/products">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="/admin/employees">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="/admin/customers">Customer</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Company
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Blog</a></li>
+                        <li><a class="dropdown-item" href="#">About Us</a></li>
+                        <li><a class="dropdown-item" href="#">Contact us</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1 th:align="center">ADD NEW EMPLOYEE</h1>
+<div class="x">
+    <form action="#" th:action="@{/admin/employees/addEmployee}" th:object="${addEmployee}" method="post">
+        <div class="row mb-3">
+            <label for="name" class="col-sm-3 ">Name</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="name" th:field="*{fullname}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="dob" class="col-sm-5">Date of birth</label>
+            <div class="col-12">
+                <input type="date" rows="6" cols="20" class="form-control" id="dob" th:field="*{dob}"}></input>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="email" class="col-sm-5">Email</label>
+            <div class="col-12">
+                <input type="text" rows="6" cols="20" class="form-control" id="email" th:field="*{email}"}></input>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="phone" class="col-sm-10 ">Phone</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="phone" th:field="*{phone}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="address" class="col-sm-10 ">Address</label>
+            <div class="col-12">
+                <input type="text" class="form-control" id="address" th:field="*{address}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="selectStatus" class="col-sm-10 ">Status</label>
+            <div class="col-12">
+                <!--                <input type="text" class="form-control" id="inputStatus" th:field="*{status}">-->
+                <select id="selectStatus" th:field="*{status}">
+                    <option th:each="st : ${T(com.example.backend.enums.EmployeeStatus).values()}"
+                            th:value="${st}" th:text="${st}"></option>
+                </select>
+            </div>
+        </div>
+
+        <br/>
+        <div class="d-grid gap-1 col-3 mx-auto">
+            <input class="btn btn-primary" type="submit" value="Add Employee">
+        </div>
+    </form>
+</div>
+</body>
+</html>
